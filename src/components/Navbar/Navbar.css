@@ -1,5 +1,27 @@
-.navbar{
-    background-color:aqua;
+.navbar-wrapper{
+    width: 100%;
+    background-color: aqua;
+    padding: 0;
+}
+
+.navbar-container{
+    margin-left: auto!important;
+    margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    max-width: 1200px;
+   
+}
+
+.navbar-container .navbar-items{
     display: flex;
-    justify-content: space-between;
+    grid-column-gap: 20px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navbar-items a{
+    color: #333;
+    text-transform: uppercase;
+    text-decoration: none;
 }
