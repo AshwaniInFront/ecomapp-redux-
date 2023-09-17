@@ -1,3 +1,3 @@
-import  myntraLogo  from './myntraLogo.png';
+import myntraLogo from './myntraLogo.png';
 
-export {myntraLogo}
+export { myntraLogo }

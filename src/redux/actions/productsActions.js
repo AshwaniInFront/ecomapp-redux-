@@ -16,11 +16,16 @@ export const getSingleProducts = (data) => ({
   payload: data,
 });
 
-
-export const setFilteredProducts = (category) => ({
-  type: 'SET_FILTERED_PRODUCTS',
-  payload: category,
+export const addItemToCart = (product) => ({
+  type: 'ADD_CARTITEM',
+  payload: product,
 });
+
+export const removeItemFromCart = (product) => ({
+  type: 'REMOVE_CARTITEM',
+  payload: product,
+});
+
 
 
 export const getProducts =  () => {

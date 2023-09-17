@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
 import './Navbar.css';
-import { myntraLogo } from '../../assets/index';
+// import { myntraLogo } from '../../assets/index';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Home from '../Home/Home';
 
@@ -12,7 +12,7 @@ const Navbar = () => {
             <Grid item xs={3}>
                 <Box sx={{maxWidth:200}}>
                     <Link  to= '/'>
-                        <img src={myntraLogo} className='img-fluid'/>
+                        <img src="" className='img-fluid'/>Myntra
                     </Link>
                 </Box>
             </Grid>

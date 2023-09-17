@@ -11,52 +11,64 @@ import ProductList from './ProductList.js';
 const Products = () => {
 
   const [category, setCategories] = useState([])
-  const [categoryproduct,setCatProduct] = useState();
+  const [categoryproduct, setCatProduct] = useState();
   const dispatch = useDispatch(); // Get the dispatch function
   const products = useSelector((state) => state.products.products); // Access products from Redux store
   const isLoading = useSelector((state) => state.products.isLoading);
 
   const getCategories = () => {
     const uniqueCategories = [...new Set(products.flatMap((product) => product.category))];
+    const all = "All";
+    uniqueCategories.push(all);
     console.log(uniqueCategories, 'unique categories')
     setCategories(uniqueCategories);
   }
 
   const handleCategory = (matchcategory) => {
     let categorylist = products.filter((product) => {
-      return product.category === matchcategory
+      if (matchcategory === 'All') {
+        return products
+      }
+      return product.category === matchcategory;
     })
     setCatProduct(categorylist);
   }
 
+
   useEffect(() => {
-      getCategories();
+    dispatch(getProducts());
+  }, []);
+
+
+  useEffect(() => {
+    getCategories();
   }, [products])
 
   return (
     <Box>
- 
-          <Grid container spacing={2} sx={{ py: 5 }}>
-            <Grid item lg={12}>
-              {category?.map((newcat) => {
-                return (
-                  <Button variant="contained" sx={{ mx: 1 }} onClick={() => handleCategory(newcat)} >
-                    {newcat}
-                  </Button>
-                )
-              })}
-            </Grid>
-
-            <Grid container spacing={2} sx={{ py: 5 }}>
-              {categoryproduct ?
-                <ProductList newproduct={categoryproduct} />
-              :
-                <ProductList newproduct={products} />
-              }
-            </Grid>
+      {isLoading ? <div class="loading"></div>
+        :
+        <Grid container spacing={2} sx={{ py: 5 }}>
+          <Grid item lg={12}>
+            {category?.map((newcat) => {
+              return (
+                <Button variant="contained" sx={{ mx: 1 }} onClick={() => handleCategory(newcat)} >
+                  {newcat}
+                </Button>
+              )
+            })}
           </Grid>
 
-   
+          <Grid container spacing={2} sx={{ py: 5 }}>
+            {categoryproduct ?
+              <ProductList newproduct={categoryproduct} />
+              :
+              <ProductList newproduct={products} />
+            }
+          </Grid>
+        </Grid>
+      }
+
     </Box>
   )
 }

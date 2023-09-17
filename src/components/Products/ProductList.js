@@ -18,11 +18,10 @@ const ProductList = ({ newproduct }) => {
             console.log(newId, 'newId')
         } catch (error) {
             return error.message;
-        }
-
+        };
     };
 
-
+    
     useEffect(() => {
         dispatch(getProducts());
     }, []);
@@ -32,7 +31,7 @@ const ProductList = ({ newproduct }) => {
         <>
             {newproduct.map((product) => {
                 return (
-                    <Grid item lg={3} md={4} key={product.id} sx={{ mt: 3 }}>
+                    <Grid item lg={3} md={6} sm={6} xs={12} key={product.id} sx={{ mt: 3 }}>
                         <Box sx={{ height: 500 }}>
                             <Box sx={{
                                 width: 200,
