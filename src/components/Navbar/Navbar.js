@@ -4,15 +4,20 @@ import './Navbar.css';
 // import { myntraLogo } from '../../assets/index';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Home from '../Home/Home';
+import { useSelector } from 'react-redux';
+import { flipkart, myntraLogo } from '../../assets';
 
 const Navbar = () => {
+
+    const cartItems = useSelector((item) => item.products.cartItems)
+
     return (
-        <Grid className="navbar-wrapper">
+        <Grid className="navbar-wrapper"  position="fixed" sx={{zIndex: '1'}}>
         <Grid container spacing={2} className="navbar-container">
             <Grid item xs={3}>
                 <Box sx={{maxWidth:200}}>
                     <Link  to= '/'>
-                        <img src="" className='img-fluid'/>Myntra
+                        <img src={myntraLogo} className='img-fluid'/>
                     </Link>
                 </Box>
             </Grid>
@@ -29,6 +34,7 @@ const Navbar = () => {
                 <Link to="/products" />
                 <Link to="/cart" >
                     <ShoppingCartOutlinedIcon />
+                    {cartItems.length}
                 </Link>
             </Grid>
         </Grid>

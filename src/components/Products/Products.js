@@ -20,7 +20,6 @@ const Products = () => {
     const uniqueCategories = [...new Set(products.flatMap((product) => product.category))];
     const all = "All";
     uniqueCategories.push(all);
-    console.log(uniqueCategories, 'unique categories')
     setCategories(uniqueCategories);
   }
 
@@ -46,9 +45,10 @@ const Products = () => {
 
   return (
     <Box>
-      {isLoading ? <div class="loading"></div>
+      {isLoading ? 
+      <div class="loading"></div>
         :
-        <Grid container spacing={2} sx={{ py: 5 }}>
+        <Grid container spacing={2} sx={{ py: 5,maxWidth:1200,m:'auto' }}>
           <Grid item lg={12}>
             {category?.map((newcat) => {
               return (

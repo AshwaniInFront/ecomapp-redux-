@@ -1,21 +1,26 @@
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
 import { getProductData, getProducts, getSingleProducts, setProducts } from '../../redux/actions/productsActions.js'; // Import the action
 import { Link } from 'react-router-dom';
 import './products.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getProductId } from '../../services/api';
 
 const ProductList = ({ newproduct }) => {
 
     const dispatch = useDispatch();
+    const [quantity] = useState(0);
 
     const getProductData = async (id) => {
 
         try {
             const newId = await getProductId(`${id}`);
-            dispatch(getSingleProducts(newId)); // Dispatch the setProducts action
-            console.log(newId, 'newId')
+            const item = {
+                ...newId,
+                quantity: quantity,
+            };
+            dispatch(getSingleProducts(item)); // Dispatch the setProducts action
+            console.log(item, 'item')
         } catch (error) {
             return error.message;
         };
@@ -26,13 +31,12 @@ const ProductList = ({ newproduct }) => {
         dispatch(getProducts());
     }, []);
 
-
     return (
         <>
             {newproduct.map((product) => {
                 return (
                     <Grid item lg={3} md={6} sm={6} xs={12} key={product.id} sx={{ mt: 3 }}>
-                        <Box sx={{ height: 500 }}>
+                        <Box sx={{ minHeight: 500 }}>
                             <Box sx={{
                                 width: 200,
                                 m: 'auto',
@@ -46,17 +50,20 @@ const ProductList = ({ newproduct }) => {
                             <Typography component="h4" sx={{ fontWeight: 800, textTransform: 'uppercase' }}>
                                 {product.category}
                             </Typography>
-                            <Typography component="h2" sx={{ mt: 1 }}>
+                            <Typography component="h2" sx={{ mt: 1}}>
                                 {product.title}
                             </Typography>
                             <Typography component="h2" sx={{ mt: 1, fontWeight: 'bold' }}>
                                 ${product.price}
                             </Typography>
-                            <Typography sx={{ cursor: 'pointer', backgroundColor: '#fd8412' }}>
-                                <Link to={`/products/${product.id}`} sx={{ cursor: 'pointer' }} onClick={() => getProductData(product.id)} >
-                                    view product
+                                <Link to={`/products/${product.id}`} 
+                                    sx={{ cursor: 'pointer' }} 
+                                    onClick={() => getProductData(product.id)} 
+                                >
+                                    <Button variant="contained" color="success">
+                                        view product
+                                    </Button>
                                 </Link>
-                            </Typography>
                         </Box>
                     </Grid>
                 )

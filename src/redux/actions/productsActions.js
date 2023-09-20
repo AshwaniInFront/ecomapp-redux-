@@ -10,6 +10,10 @@ export const failProducts = (failure) => ({
   payload: failure,
 });
 
+export const getCartItems = (product) => ({
+  type: 'GET_CARTITEMS',
+  payload: product,
+});
 
 export const getSingleProducts = (data) => ({
   type: 'GET_PRODUCTS',
@@ -21,19 +25,27 @@ export const addItemToCart = (product) => ({
   payload: product,
 });
 
-export const removeItemFromCart = (product) => ({
-  type: 'REMOVE_CARTITEM',
+export const increaseCartItem = (product) => ({
+  type: 'INCREASE_CARTITEM',
   payload: product,
 });
 
+export const decreaseCartItem = (product) => ({
+  type: 'DECREASE_CARTITEM',
+  payload: product,
+});
 
+export const removeProduct = (productId) => ({
+  type: 'REMOVE_CARTITEMS',
+  payload: productId,
+});
 
 export const getProducts =  () => {
   return async (dispatch) => {
     try {
       const data = await fetchData('products');
       dispatch(setProducts(data)); // Dispatch the setProducts action
-      console.log(data);
+    
     } catch (error) {
       dispatch(failProducts(error.message));
     }
